@@ -1,51 +1,63 @@
 package principal;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import classes.Cidade;
-import classes.Pessoa;
+import classes.ItemProdutoVenda;
+import classes.Produto;
+import classes.Vendas;
 
 public class Inicio {
 
 	public static void main(String[] args) {
 
-		String qtdPessoa = JOptionPane.showInputDialog("Quantas pessoas deseja cadastrar?");
+		int acao1 = JOptionPane.showConfirmDialog(null, "Deseja realizar uma venda?");
 
-		int totalPessoa = Integer.parseInt(qtdPessoa);
+		if (acao1 == 0) {
+			List<ItemProdutoVenda> itemProdutoVendas = new ArrayList<ItemProdutoVenda>();
+			List<Produto>produtos = new ArrayList<Produto>();
+			String info = JOptionPane.showInputDialog("Informe Cadastro");
+			Vendas venda = new Vendas();
+			Random codigoVenda = new Random();
 
-		List<Cidade> cidades = new ArrayList<Cidade>();
+			venda.setCodigo(codigoVenda.nextInt());/// numero qualquer da venda
+			for (int i = 0; i < Integer.parseInt(info); i++) {
+				// System.out.println("Posicão do vetor é = " + (i+1));
+				Produto produto = new Produto();
+				ItemProdutoVenda itemProdutoVenda = new ItemProdutoVenda();
+				String nomeProduto = JOptionPane.showInputDialog(" Qual é o nome do produto " + (i + 1) + "?");
+				String ValorProduto = JOptionPane.showInputDialog(" Qual é o valor do produto " + (i + 1) + "?");
+				String quantidadeItem = JOptionPane.showInputDialog("Quantidade do item " + (i + 1) + "?");
+				itemProdutoVenda.setQuantidadeItem(Integer.parseInt(quantidadeItem));
+				produto.setNome(nomeProduto);
+				produto.setValor(Double.parseDouble(ValorProduto));
+				produtos.add(produto);
+				itemProdutoVenda.getProdutos().add(produto); // adicionando o produto na lista dos itens do objeto
+				itemProdutoVenda.TotalProduto();
+				itemProdutoVendas.add(itemProdutoVenda); // adicionando os item um por vez na lista de itens
 
-		for (int p = 1; p <= totalPessoa; p++) {
+			}
 
-			Pessoa pessoa = new Pessoa();
-			String nomePessoa = JOptionPane.showInputDialog("Qual é o nome da Pessoa " + p + "º ? ");
-			pessoa.setNome(nomePessoa);
-			String idadePessoa = JOptionPane.showInputDialog("Qual é o nome da idade " + pessoa.getNome() + "º ? ");
-			pessoa.setIdade(Integer.parseInt(idadePessoa));
+			System.out.println("Venda: " + venda.getCodigo());
 
-			Cidade cidade = new Cidade();
-			String cidadePessoa = JOptionPane.showInputDialog("Qual é a cidade da pessoa: " + pessoa.getNome() + " ? ");
-			cidade.setNome(cidadePessoa);
-			String cepCidadePessoa = JOptionPane.showInputDialog("Qual é a CEP" + cidade.getNome() + " ? ");
-			cidade.setCep(cepCidadePessoa);
-
-			// adicionando as pessoas na cidade
-			cidade.getPessoas().add(pessoa);
-
-			// adicionando a cidade na lista
-			cidades.add(cidade);
-
-		}
-		for (int i = 0; i < cidades.size(); i++) {
-			Cidade cidade = cidades.get(i);
-			System.out.println(cidade);
+			for (int x = 0; x < itemProdutoVendas.size(); x++) {
+				ItemProdutoVenda itv = itemProdutoVendas.get(x);
+				
+				System.out.println("Descrição : " + itv.Result());
+				
+			}
 			
 			
+				
 			
 
+		} else {
+			JOptionPane.showMessageDialog(null, "Ação finalizada");
 		}
 	}
+
 }

@@ -1,9 +1,9 @@
 package classes;
 
-public class Pessoa {
+public class Produto {
 
 	private String nome;
-	private int idade;
+	private double valor;
 
 	public String getNome() {
 		return nome;
@@ -13,12 +13,12 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public int getIdade() {
-		return idade;
+	public double getValor() {
+		return valor;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 
 }
